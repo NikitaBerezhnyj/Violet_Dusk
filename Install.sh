@@ -14,10 +14,10 @@ if [ ! -d "shell" ]; then
     echo "The 'shell' folder was not found."
     exit 1
 fi
-# Перевірка існування теки wallpaper
-if [ ! -d "wallpaper" ]; then
+# Перевірка існування теки wallpapers
+if [ ! -d "wallpapers" ]; then
 	echo "An error occurred during installation."
-    echo "The 'wallpaper' folder was not found."
+    echo "The 'wallpapers' folder was not found."
     exit 1
 fi
 # Копіюємо іконки в теку .icons в домашній текі користувача
@@ -28,10 +28,10 @@ echo "Icons moved"
 mkdir -p "$HOME/.themes"
 cp -r shell/* "$HOME/.themes/"
 echo "The topic has been moved"
-# Копіюємо шпалери в стандартну теку Зображення та створюємо теку Wallpapers
-mkdir -p "$HOME/Pictures/Wallpapers"
-cp -r wallpaper/* "$HOME/Wallpapers/"
-echo "Wallpaper transferred"
+# Копіюємо шпалери в стандартну теку Зображення та створюємо теку wallpapers
+mkdir -p "$HOME/Pictures/wallpapers"
+cp -r wallpapers/* "$HOME/wallpapers/"
+echo "wallpapers transferred"
 echo "File transfer successful..."
 
 # Встановлення тем із файлів що були перенесені раніше
@@ -49,19 +49,41 @@ echo "The shell for gtk-3 is installed."
 gsettings set org.gnome.desktop.interface cursor-theme 'Bibita-Modern-Classic'
 echo "Cursor is set."
 # Встановлення шпалерів
-gsettings set org.gnome.desktop.background picture-uri file://$HOME/Wallpapers/first.jpg
+gsettings set org.gnome.desktop.background picture-uri file://$HOME/wallpapers/first.jpg
 echo "Шпалери встановлено."
 echo "Розпочато встановлення розширень Gnome..."
 
 # Встановлення Gnome розширень
 echo "Installing Gnome extensions has started..."
+# Перевірка наявності програми gnome-extensions
+if ! which gnome-extensions &> /dev/null; then
+    echo "The gnome-extensions program is installed..."
+    case "$(uname -s)" in
+        Linux)
+            if [ -x "$(command -v apt)" ]; then
+                sudo apt install gnome-shell-extensions
+            elif [ -x "$(command -v pacman)" ]; then
+                sudo pacman -S gnome-shell-extensions
+            elif [ -x "$(command -v dnf)" ]; then
+                sudo dnf install gnome-shell-extensions
+            else
+                echo "System is not supported"
+                exit 1
+            fi
+            ;;
+        *)
+            echo "System is not supported"
+            exit 1
+            ;;
+    esac
+fi
 # Список розширень для встановлення
 extensions=(
-    "QSTWeak@github.com"    # Quick Setting Tweaker
-    "blur-my-shell@rockon999.github.io"    # Blur my Shell
-    "logo-menu@gnome-shell-extensions.gcampax.github.com"    # Logo Menu
-    "top-bar-organizer@phocean.net"    # Top Bar Organizer
-    "vitals@CoreCoding.com"    # Vitals
+    "QSTWeak@github.com"    									# Quick Setting Tweaker
+    "blur-my-shell@rockon999.github.io"    						# Blur my Shell
+    "logo-menu@gnome-shell-extensions.gcampax.github.com"    	# Logo Menu
+    "top-bar-organizer@phocean.net"    							# Top Bar Organizer
+    "vitals@CoreCoding.com"    									# Vitals
 )
 # Встановлення кожного розширення
 for extension in "${extensions[@]}"; do
