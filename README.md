@@ -1,6 +1,6 @@
 # Violet Dusk (Gnome Theme)
 
-Violet Dusk repository has [Ukrainian :ukraine:](#мова-програмування-based-ukraine) and [English :uk:](#programming-language-based-uk) localizations
+Violet Dusk repository has [Ukrainian :ukraine:](#violet-dusk-ukraine) and [English :uk:](#violet-dusk-ukraine) localizations
 
 **_Quickly navigate between sections:_**
 
@@ -48,13 +48,13 @@ Violet Dusk repository has [Ukrainian :ukraine:](#мова-програмува�
 1. Клонуйте репозиторій на свій комп'ютер:
 
 ```bash
-git clone https://github.com/NikitaBerezhnyj/Flat_Lavanda
+git clone https://github.com/NikitaBerezhnyj/Violet_Dusk.git
 ```
 
 1. Перейдіть у директорію проєкту:
 
 ```bash
-cd Flat_Lavanda
+cd Violet_Dusk
 ```
 
 1. Запустіть скрипт встановлення:
@@ -111,13 +111,13 @@ To install the Violet Dusk theme using the Install.sh script, follow these steps
 1. Clone the repository to your computer:
 
 ```bash
-git clone https://github.com/NikitaBerezhnyj/Flat_Lavanda
+git clone https://github.com/NikitaBerezhnyj/Violet_Dusk.git
 ```
 
 1. Change to the project directory:
 
 ```bash
-cd Flat_Lavanda
+cd Violet_Dusk
 ```
 
 1. Run the installation script:
