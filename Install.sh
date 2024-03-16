@@ -177,6 +177,42 @@ install_themes() {
 # }
 
 
+# install_gnome_extensions() {
+#     echo "Installing Gnome extensions has started..."
+#     progress 0 "Initializing Gnome extensions installation..."
+
+#     local extensions=(
+#         "quick-settings-tweaks@qwreey"
+#         "blur-my-shell@aunetx"
+#         "logomenu@aryan_k"
+#         "top-bar-organizer@julian.gse.jsts.xyz"
+#         "Vitals@CoreCoding.com"
+#     )
+
+#     progress_iterator=20
+
+#     for ext_uuid in "${extensions[@]}"; do
+#         ext_dir="$HOME/.local/share/gnome-shell/extensions/$ext_uuid"
+#         ext_zip="./Extensions/${ext_uuid}.zip"
+
+#         if [ -d "$ext_dir" ]; then
+#             echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
+#         else
+#             mkdir -p "$ext_dir"
+#             unzip -qq "$ext_zip" -d "$ext_dir"
+#             echo "Встановлено розширення $ext_uuid"
+#             gnome-shell-extension-tool -e "$ext_uuid@$(whoami)"
+#             echo "'$ext_uuid' is now enabled."
+#             progress $progress_iterator "Installing extension: $ext_uuid..."
+#             progress_iterator=$((progress_iterator + 20))
+#         fi
+#     done
+
+#     gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
+#     progress 100 "Installing Gnome extensions is complete..."
+# }
+
+
 install_gnome_extensions() {
     echo "Installing Gnome extensions has started..."
     progress 0 "Initializing Gnome extensions installation..."
@@ -208,8 +244,11 @@ install_gnome_extensions() {
         fi
     done
 
-    gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
     progress 100 "Installing Gnome extensions is complete..."
+
+    echo "Перезавантаження GNOME Shell..."
+    # gnome-shell --replace  # Закоментуйте, якщо не маєте root-привілеїв
+    echo "Натисніть Alt+F2, введіть 'r' і натисніть Enter для перезавантаження GNOME Shell"
 }
 
 transfer_files
