@@ -43,41 +43,41 @@ function progress()
 transfer_files() {
     echo "File transfer started..."
     progress 0 "Initializing file transfer..."
-    # Перевірка існування теки icons
-    if [ ! -d "icons" ]; then
+    # Перевірка існування теки Icons
+    if [ ! -d "Icons" ]; then
         echo "An error occurred during installation."
-        echo "The 'icons' folder was not found."
+        echo "The 'Icons' folder was not found."
         exit 1
     fi
     # Перевірка існування теки shell
-    if [ ! -d "shell" ]; then
+    if [ ! -d "Shell" ]; then
         echo "An error occurred during installation."
         echo "The 'shell' folder was not found."
         exit 1
     fi
-    # Перевірка існування теки wallpapers
-    if [ ! -d "wallpapers" ]; then
+    # Перевірка існування теки Wallpapers
+    if [ ! -d "Wallpapers" ]; then
         echo "An error occurred during installation."
-        echo "The 'wallpapers' folder was not found."
+        echo "The 'Wallpapers' folder was not found."
         exit 1
     fi
-    # Копіюємо іконки в теку .icons в домашній текі користувача
+    # Копіюємо іконки в теку .Icons в домашній текі користувача
     mkdir -p "$HOME/.icons"
-    cp -r icons/* "$HOME/.icons/"
+    cp -r Icons/* "$HOME/.icons/"
     progress 50 "Copying icons..."
     # Копіюємо тему в теку .themes в домашній текі користувача
     mkdir -p "$HOME/.themes"
-    cp -r shell/* "$HOME/.themes/"
+    cp -r Shell/* "$HOME/.themes/"
     progress 70 "Copying shell themes..."
     # Копіюємо шпалери в теку Wallpapers
     # Перевірка наявності теки Wallpapers у домашній директорії
     if [ ! -d "$HOME/Wallpapers" ]; then
-        echo "The 'Wallpapers' tag is not found."
+        echo "The 'Wallpapers' dir is not found."
         echo "Creating the Wallpapers theme..."
         mkdir -p "$HOME/Wallpapers"
         echo "The 'Wallpapers' theme is created."
     fi
-    cp -r wallpapers/* "$HOME/wallpapers/"
+    cp -r Wallpapers/* "$HOME/Wallpapers/"
     progress 100 "File transfer successful..."
 }
 
@@ -87,7 +87,7 @@ install_themes() {
     progress 0 "Initializing theme installation..."
     # Встановлення піктограм
     gsettings set org.gnome.desktop.interface icon-theme 'Oranchelo'
-    progress 25 "Setting up icons..."
+    progress 25 "Setting up Icons..."
     # Встановлення оболонки
     gsettings set org.gnome.shell.extensions.user-theme name Lavanda-Dark
     progress 50 "Setting up shell themes..."
@@ -98,7 +98,7 @@ install_themes() {
     gsettings set org.gnome.desktop.interface cursor-theme 'Bibita-Modern-Classic'
     progress 90 "Setting up cursors..."
     # Встановлення шпалерів
-    gsettings set org.gnome.desktop.background picture-uri file://$HOME/wallpapers/walpaper.jpg
+    gsettings set org.gnome.desktop.background picture-uri file://$HOME/Wallpapers/walpaper.jpg
     progress 100 "Theme installation complete."
 }
 

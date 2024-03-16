@@ -27,17 +27,17 @@ Violet Dusk repository has [Ukrainian :ukraine:](#violet-dusk-ukraine) and [Engl
 ### Скриншоти
 
 <p align='center'>
-  <img src='./screenshots/screenshot_1.png' alt='Скриншот 1' style="width:90%">
+  <img src='./Screenshots/screenshot_1.png' alt='Скриншот 1' style="width:90%">
   <em>Скриншот 1</em>
 </p>
 
 <p align='center'>
-  <img src='./screenshots/screenshot_2.png' alt='Скриншот 2' style="width:90%">
+  <img src='./Screenshots/screenshot_2.png' alt='Скриншот 2' style="width:90%">
   <em>Скриншот 2</em>
 </p>
 
 <p align='center'>
-  <img src='./screenshots/screenshot_3.png' alt='Скриншот 3' style="width:90%">
+  <img src='./Screenshots/screenshot_3.png' alt='Скриншот 3' style="width:90%">
   <em>Скриншот 3</em>
 </p>
 
@@ -90,17 +90,17 @@ Installing a theme manually can be a time-consuming process that requires a lot 
 ### Screenshots
 
 <p align='center'>
-  <img src='./screenshots/screenshot_1.png' alt='Screenshot 1' style="width:90%">
+  <img src='./Screenshots/screenshot_1.png' alt='Screenshot 1' style="width:90%">
   <em>Скриншот 1</em>
 </p>
 
 <p align='center'>
-  <img src='./screenshots/screenshot_2.png' alt='Screenshot 2' style="width:90%">
+  <img src='./Screenshots/screenshot_2.png' alt='Screenshot 2' style="width:90%">
   <em>Скриншот 2</em>
 </p>
 
 <p align='center'>
-  <img src='./screenshots/screenshot_3.png' alt='Screenshot 3' style="width:90%">
+  <img src='./Screenshots/screenshot_3.png' alt='Screenshot 3' style="width:90%">
   <em>Скриншот 3</em>
 </p>
 
