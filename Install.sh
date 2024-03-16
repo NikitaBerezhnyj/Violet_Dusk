@@ -246,9 +246,9 @@ install_gnome_extensions() {
 
     progress 100 "Installing Gnome extensions is complete..."
 
-    echo "Перезавантаження GNOME Shell..."
-    # gnome-shell --replace  # Закоментуйте, якщо не маєте root-привілеїв
-    echo "Натисніть Alt+F2, введіть 'r' і натисніть Enter для перезавантаження GNOME Shell"
+    # echo "Перезавантаження GNOME Shell..."
+    gnome-shell --replace  # Закоментуйте, якщо не маєте root-привілеїв
+    # echo "Натисніть Alt+F2, введіть 'r' і натисніть Enter для перезавантаження GNOME Shell"
 }
 
 transfer_files
