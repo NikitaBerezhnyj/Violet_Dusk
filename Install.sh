@@ -144,36 +144,34 @@ install_gnome_extensions() {
     echo "Installing Gnome extensions has started..."
     progress 0 "Initializing Gnome extensions installation..."
 
-    local extension_dir="$HOME/.local/share/gnome-shell/extensions"
     local extensions=(
-        "./Extensions/quick-settings-tweaks@qwreey.zip"
-        "./Extensions/blur-my-shell@aunetx.zip"
-        "./Extensions/logomenu@aryan_k.zip"
-        "./Extensions/top-bar-organizer@julian.gse.jsts.xyz.zip"
-        "./Extensions/Vitals@CoreCoding.com.zip"
+        "quick-settings-tweaks@qwreey"
+        "blur-my-shell@aunetx"
+        "logomenu@aryan_k"
+        "top-bar-organizer@julian.gse.jsts.xyz"
+        "Vitals@CoreCoding.com"
     )
-
-    mkdir -p "$extension_dir"
 
     progress_iterator=20
 
-    for ext in "${extensions[@]}"; do
-        ext_name=$(basename "$ext" .zip)
-        ext_dir="$extension_dir/$ext_name"
+    for ext_uuid in "${extensions[@]}"; do
+        ext_dir="$HOME/.local/share/gnome-shell/extensions/$ext_uuid"
+        ext_zip="./Extensions/${ext_uuid}.zip"
 
         if [ -d "$ext_dir" ]; then
-            echo "Розширення $ext_name вже встановлене. Пропускаємо..."
+            echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
         else
-            unzip -qqo "$ext" -d "$extension_dir" # додано опцію -o для перезапису файлів
-            echo "Встановлено розширення $ext_name"
-            progress $progress_iterator "Installing extension: $ext_name..."
+            mkdir -p "$ext_dir"
+            unzip -qq "$ext_zip" -d "$ext_dir"
+            echo "Встановлено розширення $ext_uuid"
+            gnome-shell-extension-tool -e "$ext_uuid"
+            echo "'$ext_uuid' is now enabled."
+            progress $progress_iterator "Installing extension: $ext_uuid..."
             progress_iterator=$((progress_iterator + 20))
         fi
     done
 
     progress 100 "Installing Gnome extensions is complete..."
-
-    # gnome-shell-extension-tool -r # Перезавантаження GNOME Shell вимкнено
 }
 
 transfer_files
