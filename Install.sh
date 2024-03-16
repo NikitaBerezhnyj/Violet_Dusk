@@ -232,13 +232,14 @@ install_gnome_extensions() {
         ext_zip="./Extensions/${ext_uuid}.zip"
 
         if [ -d "$ext_dir" ]; then
-            echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
+            # echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
+            continue
         else
             mkdir -p "$ext_dir"
             unzip -qq "$ext_zip" -d "$ext_dir"
-            echo "Встановлено розширення $ext_uuid"
+            # echo "Встановлено розширення $ext_uuid"
             gnome-shell-extension-tool -e "$ext_uuid@$(whoami)"
-            echo "'$ext_uuid' is now enabled."
+            # echo "'$ext_uuid' is now enabled."
             progress $progress_iterator "Installing extension: $ext_uuid..."
             progress_iterator=$((progress_iterator + 20))
         fi
@@ -246,11 +247,14 @@ install_gnome_extensions() {
 
     progress 100 "Installing Gnome extensions is complete..."
 
-    # echo "Перезавантаження GNOME Shell..."
-    gnome-shell --replace  # Закоментуйте, якщо не маєте root-привілеїв
-    # echo "Натисніть Alt+F2, введіть 'r' і натисніть Enter для перезавантаження GNOME Shell"
+    echo "!!! Attention!!!"
+    echo "To complete the installation, you must restart the GNOME Shell..."
+    echo "Press Alt+F2, type 'r' and press Enter to restart the GNOME Shell"
 }
 
 transfer_files
 install_themes
 install_gnome_extensions
+
+echo "Thank you for downloading the theme"
+echo "Happy hacking :)"
