@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Імпортуємо функції з ProgressBar.sh
-# source ./ProgressBar.sh
+CURRENT_PROGRESS=0
 
+# Встановлення затримки в оновлені прогресу
 function delay()
 {
     sleep 0.1;
 }
 
-CURRENT_PROGRESS=0
+# Функція для відображення progressbar
 function progress()
 {
     PARAM_PROGRESS=$1;
@@ -107,44 +107,38 @@ install_themes() {
 install_gnome_extensions() {
     echo "Installing Gnome extensions has started..."
     progress 0 "Initializing Gnome extensions installation..."
-    # Перевірка наявності програми gnome-extensions
-    if ! which gnome-extensions &> /dev/null; then
-        echo "The gnome-extensions program is installed..."
-        case "$(uname -s)" in
-            Linux)
-                if [ -x "$(command -v apt)" ]; then
-                    sudo apt install gnome-shell-extensions
-                elif [ -x "$(command -v pacman)" ]; then
-                    sudo pacman -S gnome-shell-extensions
-                elif [ -x "$(command -v dnf)" ]; then
-                    sudo dnf install gnome-shell-extensions
-                else
-                    echo "System is not supported"
-                    exit 1
-                fi
-                ;;
-            *)
-                echo "System is not supported"
-                exit 1
-                ;;
-        esac
-    fi
-    # Список розширень для встановлення
-    extensions=(
-        "quick-settings-tweaks@qwreey"                         # Quick Setting Tweaker
-        "blur-my-shell@aunetx"                                 # Blur my Shell
-        "logomenu@aryan_k"                                     # Logo Menu
-        "top-bar-organizer@julian.gse.jsts.xyz"                # Top Bar Organizer
-        "Vitals@CoreCoding.com"                                # Vitals
+
+    local extension_dir="$HOME/.local/share/gnome-shell/extensions"
+    local extensions=(
+        "./Extensions/quick-settings-tweaks@qwreey.zip"
+        "./Extensions/blur-my-shell@aunetx.zip"
+        "./Extensions/logomenu@aryan_k.zip"
+        "./Extensions/top-bar-organizer@julian.gse.jsts.xyz.zip"
+        "./Extensions/Vitals@CoreCoding.com.zip"
     )
+
+    mkdir -p "$extension_dir"
+
     # Встановлення кожного розширення
-    Iterator = 20
-    for extension in "${extensions[@]}"; do
-        gnome-extensions install "$extension"
-        progress $Iterator "Installing extension: $extension..."
-        Iterator=$((Iterator + 10))
+    progress_iterator = 20
+
+    for ext in "${extensions[@]}"; do
+        ext_name=$(basename "$ext" .zip)
+        ext_dir="$extension_dir/$ext_name"
+        progress $progress_iterator "Installing extension: $ext_name..."
+        progress_iterator=$((progress_iterator + 20))
+
+        if [ -d "$ext_dir" ]; then
+            echo "Розширення $ext_name вже встановлене. Пропускаємо..."
+        else
+            unzip -qq "$ext" -d "$extension_dir"
+            echo "Встановлено розширення $ext_name"
+        fi
     done
+
     progress 100 "Installing Gnome extensions is complete..."
+
+    gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
 }
 
 transfer_files
