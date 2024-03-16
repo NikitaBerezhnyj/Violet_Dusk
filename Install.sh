@@ -140,6 +140,43 @@ install_themes() {
 
 #     gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
 # }
+
+
+# install_gnome_extensions() {
+#     echo "Installing Gnome extensions has started..."
+#     progress 0 "Initializing Gnome extensions installation..."
+
+#     local extensions=(
+#         "quick-settings-tweaks@qwreey"
+#         "blur-my-shell@aunetx"
+#         "logomenu@aryan_k"
+#         "top-bar-organizer@julian.gse.jsts.xyz"
+#         "Vitals@CoreCoding.com"
+#     )
+
+#     progress_iterator=20
+
+#     for ext_uuid in "${extensions[@]}"; do
+#         ext_dir="$HOME/.local/share/gnome-shell/extensions/$ext_uuid"
+#         ext_zip="./Extensions/${ext_uuid}.zip"
+
+#         if [ -d "$ext_dir" ]; then
+#             echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
+#         else
+#             mkdir -p "$ext_dir"
+#             unzip -qq "$ext_zip" -d "$ext_dir"
+#             echo "Встановлено розширення $ext_uuid"
+#             gnome-shell-extension-tool -e "$ext_uuid"
+#             echo "'$ext_uuid' is now enabled."
+#             progress $progress_iterator "Installing extension: $ext_uuid..."
+#             progress_iterator=$((progress_iterator + 20))
+#         fi
+#     done
+
+#     progress 100 "Installing Gnome extensions is complete..."
+# }
+
+
 install_gnome_extensions() {
     echo "Installing Gnome extensions has started..."
     progress 0 "Initializing Gnome extensions installation..."
@@ -164,13 +201,14 @@ install_gnome_extensions() {
             mkdir -p "$ext_dir"
             unzip -qq "$ext_zip" -d "$ext_dir"
             echo "Встановлено розширення $ext_uuid"
-            gnome-shell-extension-tool -e "$ext_uuid"
+            gnome-shell-extension-tool -e "$ext_uuid@$(whoami)"
             echo "'$ext_uuid' is now enabled."
             progress $progress_iterator "Installing extension: $ext_uuid..."
             progress_iterator=$((progress_iterator + 20))
         fi
     done
 
+    gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
     progress 100 "Installing Gnome extensions is complete..."
 }
 
