@@ -72,10 +72,7 @@ transfer_files() {
     # Копіюємо шпалери в теку Wallpapers
     # Перевірка наявності теки Wallpapers у домашній директорії
     if [ ! -d "$HOME/Wallpapers" ]; then
-        echo "The 'Wallpapers' dir is not found."
-        echo "Creating the Wallpapers theme..."
         mkdir -p "$HOME/Wallpapers"
-        echo "The 'Wallpapers' theme is created."
     fi
     cp -r Wallpapers/* "$HOME/Wallpapers/"
     progress 100 "File transfer successful..."
@@ -98,7 +95,11 @@ install_themes() {
     gsettings set org.gnome.desktop.interface cursor-theme 'Bibita-Modern-Classic'
     progress 90 "Setting up cursors..."
     # Встановлення шпалерів
-    gsettings set org.gnome.desktop.background picture-uri file://$HOME/Wallpapers/walpaper.jpg
+    image_full_path = $HOME/Wallpapers/walpaper.jpg
+    gsettings set org.gnome.desktop.background picture-uri "file://$image_full_path"
+    gsettings set org.gnome.desktop.background picture-uri-dark "file://$image_full_path"
+    gsettings set org.gnome.desktop.background picture-uri "$image_full_path"
+    gsettings set org.gnome.desktop.background picture-uri-dark "$image_full_path"
     progress 100 "Theme installation complete."
 }
 
