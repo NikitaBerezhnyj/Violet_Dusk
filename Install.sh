@@ -95,7 +95,7 @@ install_themes() {
     gsettings set org.gnome.desktop.interface cursor-theme 'Bibita-Modern-Classic'
     progress 90 "Setting up cursors..."
     # Встановлення шпалерів
-    image_full_path = $HOME/Wallpapers/walpaper.jpg
+    image_full_path = "$HOME/Wallpapers/walpaper.jpg"
     gsettings set org.gnome.desktop.background picture-uri "file://$image_full_path"
     gsettings set org.gnome.desktop.background picture-uri-dark "file://$image_full_path"
     gsettings set org.gnome.desktop.background picture-uri "$image_full_path"
@@ -103,116 +103,7 @@ install_themes() {
     progress 100 "Theme installation complete."
 }
 
-# # Функція для встановлення Gnome розширень
-# install_gnome_extensions() {
-#     echo "Installing Gnome extensions has started..."
-#     progress 0 "Initializing Gnome extensions installation..."
-
-#     local extension_dir="$HOME/.local/share/gnome-shell/extensions"
-#     local extensions=(
-#         "./Extensions/quick-settings-tweaks@qwreey.zip"
-#         "./Extensions/blur-my-shell@aunetx.zip"
-#         "./Extensions/logomenu@aryan_k.zip"
-#         "./Extensions/top-bar-organizer@julian.gse.jsts.xyz.zip"
-#         "./Extensions/Vitals@CoreCoding.com.zip"
-#     )
-
-#     mkdir -p "$extension_dir"
-
-#     # Встановлення кожного розширення
-#     progress_iterator = 20
-
-#     for ext in "${extensions[@]}"; do
-#         ext_name=$(basename "$ext" .zip)
-#         ext_dir="$extension_dir/$ext_name"
-#         progress $progress_iterator "Installing extension: $ext_name..."
-#         progress_iterator=$((progress_iterator + 20))
-
-#         if [ -d "$ext_dir" ]; then
-#             echo "Розширення $ext_name вже встановлене. Пропускаємо..."
-#         else
-#             unzip -qq "$ext" -d "$extension_dir"
-#             echo "Встановлено розширення $ext_name"
-#         fi
-#     done
-
-#     progress 100 "Installing Gnome extensions is complete..."
-
-#     gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
-# }
-
-
-# install_gnome_extensions() {
-#     echo "Installing Gnome extensions has started..."
-#     progress 0 "Initializing Gnome extensions installation..."
-
-#     local extensions=(
-#         "quick-settings-tweaks@qwreey"
-#         "blur-my-shell@aunetx"
-#         "logomenu@aryan_k"
-#         "top-bar-organizer@julian.gse.jsts.xyz"
-#         "Vitals@CoreCoding.com"
-#     )
-
-#     progress_iterator=20
-
-#     for ext_uuid in "${extensions[@]}"; do
-#         ext_dir="$HOME/.local/share/gnome-shell/extensions/$ext_uuid"
-#         ext_zip="./Extensions/${ext_uuid}.zip"
-
-#         if [ -d "$ext_dir" ]; then
-#             echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
-#         else
-#             mkdir -p "$ext_dir"
-#             unzip -qq "$ext_zip" -d "$ext_dir"
-#             echo "Встановлено розширення $ext_uuid"
-#             gnome-shell-extension-tool -e "$ext_uuid"
-#             echo "'$ext_uuid' is now enabled."
-#             progress $progress_iterator "Installing extension: $ext_uuid..."
-#             progress_iterator=$((progress_iterator + 20))
-#         fi
-#     done
-
-#     progress 100 "Installing Gnome extensions is complete..."
-# }
-
-
-# install_gnome_extensions() {
-#     echo "Installing Gnome extensions has started..."
-#     progress 0 "Initializing Gnome extensions installation..."
-
-#     local extensions=(
-#         "quick-settings-tweaks@qwreey"
-#         "blur-my-shell@aunetx"
-#         "logomenu@aryan_k"
-#         "top-bar-organizer@julian.gse.jsts.xyz"
-#         "Vitals@CoreCoding.com"
-#     )
-
-#     progress_iterator=20
-
-#     for ext_uuid in "${extensions[@]}"; do
-#         ext_dir="$HOME/.local/share/gnome-shell/extensions/$ext_uuid"
-#         ext_zip="./Extensions/${ext_uuid}.zip"
-
-#         if [ -d "$ext_dir" ]; then
-#             echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
-#         else
-#             mkdir -p "$ext_dir"
-#             unzip -qq "$ext_zip" -d "$ext_dir"
-#             echo "Встановлено розширення $ext_uuid"
-#             gnome-shell-extension-tool -e "$ext_uuid@$(whoami)"
-#             echo "'$ext_uuid' is now enabled."
-#             progress $progress_iterator "Installing extension: $ext_uuid..."
-#             progress_iterator=$((progress_iterator + 20))
-#         fi
-#     done
-
-#     gnome-shell-extension-tool -r  # Перезавантажуємо GNOME Shell для застосування змін
-#     progress 100 "Installing Gnome extensions is complete..."
-# }
-
-
+# Функція для встановлення Gnome розширень
 install_gnome_extensions() {
     echo "Installing Gnome extensions has started..."
     progress 0 "Initializing Gnome extensions installation..."
@@ -232,14 +123,11 @@ install_gnome_extensions() {
         ext_zip="./Extensions/${ext_uuid}.zip"
 
         if [ -d "$ext_dir" ]; then
-            # echo "Розширення $ext_uuid вже встановлене. Пропускаємо..."
             continue
         else
             mkdir -p "$ext_dir"
             unzip -qq "$ext_zip" -d "$ext_dir"
-            # echo "Встановлено розширення $ext_uuid"
             gnome-shell-extension-tool -e "$ext_uuid@$(whoami)"
-            # echo "'$ext_uuid' is now enabled."
             progress $progress_iterator "Installing extension: $ext_uuid..."
             progress_iterator=$((progress_iterator + 20))
         fi
@@ -247,7 +135,7 @@ install_gnome_extensions() {
 
     progress 100 "Installing Gnome extensions is complete..."
 
-    echo "!!! Attention!!!"
+    echo "!!! Attention !!!"
     echo "To complete the installation, you must restart the GNOME Shell..."
     echo "Press Alt+F2, type 'r' and press Enter to restart the GNOME Shell"
 }
